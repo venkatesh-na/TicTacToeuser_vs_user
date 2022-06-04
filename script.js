@@ -23,6 +23,20 @@ function updateBoard(){
 }
 
 function checkWinner(arr){
+    
+    function checkIsAllFilled(arr){
+        let flag = true
+        for(let i = 0; i<arr.length; i++){
+            for(let j = 0; j<arr[i].length; j++){
+                if(arr[i][j] == null){
+                    flag = false
+                    break;
+                }
+            }
+        }
+        return flag
+    }
+    
     if((arr[0][0] == "X" && arr[1][1] === "X" && arr[2][2] === "X") || 
     (arr[2][0] == "X" && arr[1][1] === "X" && arr[0][2] === "X") || 
     (arr[0][0] == "X" && arr[1][0] === "X" && arr[2][0] === "X") || 
@@ -33,9 +47,7 @@ function checkWinner(arr){
     (arr[1][0] == "X" && arr[1][1] === "X" && arr[1][2] === "X")){
         winnerBoard.classList.remove("hide")
         p.textContent = "X WINS"
-    }
-    
-    if((arr[0][0] == "O" && arr[1][1] === "O" && arr[2][2] === "O") ||
+    } else if((arr[0][0] == "O" && arr[1][1] === "O" && arr[2][2] === "O") ||
     (arr[2][0] == "O" && arr[1][1] === "O" && arr[0][2] === "O") ||
     (arr[0][0] == "O" && arr[1][0] === "O" && arr[2][0] === "O") ||
     (arr[2][0] == "O" && arr[2][1] === "O" && arr[2][2] === "O") ||
@@ -45,6 +57,9 @@ function checkWinner(arr){
     (arr[1][0] == "O" && arr[1][1] === "O" && arr[1][2] === "O")){
         winnerBoard.classList.remove("hide")
         p.textContent = "O WINS"
+    } else if(checkIsAllFilled(arr)){
+         winnerBoard.classList.remove("hide")
+        p.textContent = "DRAW"
     }
 }
 
